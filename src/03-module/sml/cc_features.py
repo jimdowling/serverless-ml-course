@@ -48,7 +48,7 @@ def activity_level(trans_df : pd.DataFrame, lag: int)-> pd.DataFrame:
     # Use the same `shift` operation in Pandas to get the previous row for a given cc_number
     trans_df[f"time_delta_t_minus_{lag}"] = trans_df.groupby("cc_num")\
         .apply(lambda x : time_delta(x["datetime"].shift(-lag), x["datetime"]))\
-        .reset_index(level=0, drop=True)
+        .reset_index(level=0, drop=True)\
         .fillna(0) # handle the first datetime, which has no previous row when you call `shift`
 
     # Convert time_delta from seconds to days
