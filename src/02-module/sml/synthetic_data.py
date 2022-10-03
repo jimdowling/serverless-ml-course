@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 # %%
-# pip install faker
-
 from collections import defaultdict
 from faker import Faker
 import pandas as pd
@@ -231,6 +229,9 @@ def generate_atm_withdrawal(credit_card_number: str, cash_amounts: list, length:
                             delta: int, radius: float = None, country_code = 'US') -> List[Dict]:
     """."""
     atms = [] 
+    if length < 0:
+        raise Exception('Length must be > 0')
+        
     start = datetime.datetime.strptime(START_DATE, DATE_FORMAT)
     end = datetime.datetime.strptime(END_DATE, DATE_FORMAT)
     timestamp = faker.date_time_between(start_date=start, end_date=end, tzinfo=None)
